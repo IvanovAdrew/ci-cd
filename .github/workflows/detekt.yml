@@ -39,8 +39,8 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
-      - name: Assemble JAR
-        run: ./gradlew jar
+      - name: Assemble APK
+        run: ./gradlew assembleDebug
 
       - name: Deploy or Add to Artifact Repository
         run: echo "Add your deployment or artifact repository addition code here"
