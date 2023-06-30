@@ -11,6 +11,7 @@ env:
   DETEKT_RELEASE_TAG: v1.15.0
 
 jobs:
+
   code-check:
 
     runs-on: ubuntu-latest
@@ -73,8 +74,9 @@ jobs:
       - name: Assemble APK
         run: ./gradlew assembleDebug
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
+      - name: Create GitHub Release and Upload APK
+        uses: softprops/action-gh-release@v1
         with:
-          name: apk
-          path: ./app/build/outputs/apk/debug/app-debug.apk
+          files: ./app/build/outputs/apk/debug/app-debug.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
