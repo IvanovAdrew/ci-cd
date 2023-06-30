@@ -11,7 +11,7 @@ env:
   DETEKT_RELEASE_TAG: v1.15.0
 
 jobs:
-  build:
+  code-check:
 
     runs-on: ubuntu-latest
 
@@ -32,6 +32,20 @@ jobs:
       - name: Analyze code with Detekt
         continue-on-error: true
         run: ~/detekt --input . --report sarif:detekt.sarif.json
+
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: '16'
+          distribution: 'adopt'
 
       - name: Grant execute permissions for gradlew
         run: chmod +x ./gradlew
